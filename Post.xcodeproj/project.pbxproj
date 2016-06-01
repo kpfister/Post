@@ -14,7 +14,6 @@
 		686132001CD92A0B00A46449 /* PostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686131FF1CD92A0B00A46449 /* PostTests.swift */; };
 		6861320B1CD92A0B00A46449 /* PostUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861320A1CD92A0B00A46449 /* PostUITests.swift */; };
 		686132191CD92A5500A46449 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686132181CD92A5500A46449 /* NetworkController.swift */; };
-		68D7B2B81CEA4AB500AC1655 /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2B71CEA4AB500AC1655 /* PostListTableViewController.swift */; };
 		68D7B2BA1CEA7CED00AC1655 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2B91CEA7CED00AC1655 /* Post.swift */; };
 		68D7B2BE1CEA7F9D00AC1655 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */; };
 /* End PBXBuildFile section */
@@ -50,7 +49,6 @@
 		6861320A1CD92A0B00A46449 /* PostUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUITests.swift; sourceTree = "<group>"; };
 		6861320C1CD92A0B00A46449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		686132181CD92A5500A46449 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
-		68D7B2B71CEA4AB500AC1655 /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		68D7B2B91CEA7CED00AC1655 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,7 +103,6 @@
 			children = (
 				686131EA1CD92A0B00A46449 /* AppDelegate.swift */,
 				686131EE1CD92A0B00A46449 /* Main.storyboard */,
-				68D7B2B71CEA4AB500AC1655 /* PostListTableViewController.swift */,
 				68D7B2B91CEA7CED00AC1655 /* Post.swift */,
 				68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */,
 				686132181CD92A5500A46449 /* NetworkController.swift */,
@@ -266,7 +263,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68D7B2B81CEA4AB500AC1655 /* PostListTableViewController.swift in Sources */,
 				686131EB1CD92A0B00A46449 /* AppDelegate.swift in Sources */,
 				686132191CD92A5500A46449 /* NetworkController.swift in Sources */,
 				68D7B2BA1CEA7CED00AC1655 /* Post.swift in Sources */,
