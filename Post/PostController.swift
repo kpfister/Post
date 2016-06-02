@@ -15,7 +15,7 @@ class PostController {
     
     static let endPoint = baseURL?.URLByAppendingPathComponent("/posts.json")  //Wat
     
-    var delegate: PostControllerDelegate?
+    weak var delegate: PostControllerDelegate?
     
     var posts: [Post] = [] {
         didSet {
@@ -63,9 +63,9 @@ class PostController {
     }
 }
 
-protocol PostControllerDelegate {
+protocol PostControllerDelegate: class {
     func postsUpdated(posts: [Post])
-//    let youak = dopeDelegate
+
 }
 
 

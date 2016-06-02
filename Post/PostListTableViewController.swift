@@ -8,16 +8,29 @@
 
 import UIKit
 
-class PostListTableViewController: UITableViewController {
+class PostListTableViewController: UITableViewController, PostControllerDelegate {
     var postController = PostController()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    
+    @IBAction func refreshControlPull(sender: UIRefreshControl) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        postController.fetchPosts() { (newPosts) in
+            sender.endRefreshing()
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+    }
+    
+    
+    func postsUpdated(posts: [Post]) {
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -27,22 +40,24 @@ class PostListTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-   
+    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return postController.posts.count
     }
     
-    /*
-     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath)
+        let post = postController.posts[indexPath.row]
+        cell.textLabel?.text = post.text
+        cell.detailTextLabel?.text = "\(post.username) \(post.timestamp)\(indexPath.row)"
+        
+        
+        return cell
+    }
+    
     
     /*
      // Override to support conditional editing of the table view.
