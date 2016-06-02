@@ -16,6 +16,7 @@
 		686132191CD92A5500A46449 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686132181CD92A5500A46449 /* NetworkController.swift */; };
 		68D7B2BA1CEA7CED00AC1655 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2B91CEA7CED00AC1655 /* Post.swift */; };
 		68D7B2BE1CEA7F9D00AC1655 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */; };
+		75009B801CFF976F00DA9B77 /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009B7F1CFF976F00DA9B77 /* PostListTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		686132181CD92A5500A46449 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		68D7B2B91CEA7CED00AC1655 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		75009B7F1CFF976F00DA9B77 /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				686131EA1CD92A0B00A46449 /* AppDelegate.swift */,
 				686131EE1CD92A0B00A46449 /* Main.storyboard */,
+				75009B7F1CFF976F00DA9B77 /* PostListTableViewController.swift */,
 				68D7B2B91CEA7CED00AC1655 /* Post.swift */,
 				68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */,
 				686132181CD92A5500A46449 /* NetworkController.swift */,
@@ -266,6 +269,7 @@
 				686131EB1CD92A0B00A46449 /* AppDelegate.swift in Sources */,
 				686132191CD92A5500A46449 /* NetworkController.swift in Sources */,
 				68D7B2BA1CEA7CED00AC1655 /* Post.swift in Sources */,
+				75009B801CFF976F00DA9B77 /* PostListTableViewController.swift in Sources */,
 				68D7B2BE1CEA7F9D00AC1655 /* PostController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

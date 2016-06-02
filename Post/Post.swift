@@ -18,28 +18,31 @@ class Post {
     
     let username: String
     let text: String
-    let timestamp: NSTimeInterval
-    let identifier: NSUUID
+    let timestamp: NSTimeInterval?
+    let identifier: NSUUID?
     
     init(username: String, text: String, timestamp: NSTimeInterval? = NSDate().timeIntervalSince1970 , identifier: NSUUID? = NSUUID()) {
         
         self.username = username
         self.text = text
-        self.timestamp = timestamp!
-        self.identifier = identifier!
+        self.timestamp = timestamp
+        self.identifier = identifier
         
     }
     
-    init?(dictionary: [String: AnyObject]) {
+    init?(dictionary: [String: AnyObject], identifier: String?) {
         guard let username = dictionary[kUsername] as? String,
         text = dictionary[kText] as? String,
         timestamp = dictionary[kTimestamp] as? NSTimeInterval,
-        identifier = dictionary[kIdentifier] as? String,
+        identifier = identifier,
         uniqueIdentifier = NSUUID(UUIDString: identifier)
-        else { return nil }
+        else {
+            return nil
+        }
         self.username = username
         self.text = text
         self.timestamp = timestamp
         self.identifier = uniqueIdentifier
     }
 }
+
