@@ -9,9 +9,13 @@
 import UIKit
 
 class PostListTableViewController: UITableViewController, PostControllerDelegate {
+    
     var postController = PostController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        postController.delegate = self
         
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -33,17 +37,13 @@ class PostListTableViewController: UITableViewController, PostControllerDelegate
         tableView.reloadData()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+   
     
     // MARK: - Table view data source
     
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return postController.posts.count
     }
     

@@ -12,7 +12,6 @@ import Foundation
 class PostController {
     
     static let baseURL = NSURL(string: "https://devmtn-post.firebaseio.com")
-    
     static let endPoint = baseURL?.URLByAppendingPathComponent("/posts.json")  //Wat
     
     weak var delegate: PostControllerDelegate?
@@ -21,14 +20,24 @@ class PostController {
         didSet {
             delegate?.postsUpdated(posts)
         }
-    }// TODO will change later
+    }
     
     init() {
         fetchPosts()
     }
+    // Mark Create post
+    func addPost(username: String, text: String) {
+         let post = Post(username: String, text: String)
+        guard let requestURL = post.endpoint else {
+            fatalError("URL is nil")
+            
+        }
+        NetworkController.performRequestForURL(requestURL, httpMethod: .Put) { (data, error) in
+            self.fetchPosts()
+        }
+    }
     
-   func fetchPosts(completion: ((posts: [Post]) -> Void)? = nil) {
-    
+    func fetchPosts(completion: ((posts: [Post]) -> Void)? = nil) {
         guard let url = PostController.endPoint else {
             fatalError("URL optional is nil in \(#file)")
         }
@@ -43,29 +52,21 @@ class PostController {
                     }
                     return
             }
-            //print(postDictionaries)
             let posts = postDictionaries.flatMap ({Post(dictionary: $0.1, identifier: $0.0)})
-            
-            let sortedPosts = posts.sort({$0.0.timestamp > $0.1.timestamp})
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            let sortedPosts = posts.sort({$0.timestamp > $1.timestamp})
+            dispatch_async(dispatch_get_main_queue(), {
+                self.posts = sortedPosts
                 if let completion = completion {
                     completion(posts: sortedPosts)
                 }
+                return
             })
-          
-//            for post in sortedPosts {
-//                print(post.username)
-//            }
-            
         }
-        
     }
 }
 
 protocol PostControllerDelegate: class {
     func postsUpdated(posts: [Post])
-
 }
 
 
