@@ -14,17 +14,17 @@ class PostController {
     
     
     static let baseURL = NSURL(string: "https://devmtn-post.firebaseio.com/posts")
-    static let endpoint = baseURL?.URLByAppendingPathExtension("json")
+    let endpoint = baseURL?.URLByAppendingPathExtension("json")
     
     
     var posts: [Post] = [] // I think this will change
     
     init() {
-        fetchedPosts()
+        fetchPosts()
         
     }
     
-    static func fetchPosts(completion: ((posts: [Post]) -> Void)?) {
+    func fetchPosts(completion: ((posts: [Post]) -> Void)?) {
         guard let url = endpoint else {return}
         
         NetworkController.performRequestForURL(url, httpMethod: .Get) { (data, error) in
@@ -38,7 +38,7 @@ class PostController {
             let post = postDictionary.flatMap({Post(dictionary: $0.1, identifier: $0.0)})
             let sortedPosts = post.sort({$0.timeStamp > $1.timeStamp})
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-               self.posts = sortedPosts
+                self.posts = sortedPosts
                 if let completion = completion {
                     completion(posts: sortedPosts)
                     print(sortedPosts)
