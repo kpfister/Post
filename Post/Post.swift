@@ -8,37 +8,41 @@
 
 import Foundation
 
-struct Post {
+class Post {
     
-    private let UsernameKey = "username"
-    private let TextKey = "text"
-    private let TimestampKey = "timestamp"
-    private let UUIDKey = "uuid"
+    private let kUsername = "username"
+    private let kText = "text"
+    private let ktimestamp = "timestamp"
     
     let username: String
     let text: String
-    let timestamp: NSTimeInterval
+    let timeStamp: NSTimeInterval
     let identifier: NSUUID
     
-    init(username: String, text: String, identifier: NSUUID = NSUUID()) {
+    init(username: String, text: String, identifier: NSUUID = NSUUID(), timeStamp: NSTimeInterval = NSDate().timeIntervalSince1970) {
         
         self.username = username
         self.text = text
-        self.timestamp = NSDate().timeIntervalSince1970
+        self.timeStamp = timeStamp
         self.identifier = identifier
     }
     
-    init?(json: [String: AnyObject], identifier: String) {
-        
-        guard let username = json[UsernameKey] as? String,
-            let text = json[TextKey] as? String,
-            let timestamp = json[TimestampKey] as? Double,
-            let identifier = NSUUID(UUIDString: identifier) else { return nil }
-        
+    init?(dictionary: [String:AnyObject], identifier: String) {
+        guard let username = dictionary[kUsername] as? String,
+        text = dictionary[kText] as? String,
+        timeStamp = dictionary[ktimestamp] as? Double,
+        identifier = NSUUID(UUIDString: identifier)
+        else {
+                return nil
+        }
         self.username = username
-        self.text = text
-        self.timestamp = NSTimeInterval(floatLiteral: timestamp)
         self.identifier = identifier
+        self.text = text
+        self.timeStamp = NSTimeInterval(floatLiteral: timeStamp)
     }
+        
+//    var queryTimestamp: Post {
+//        
+//    }
     
 }
