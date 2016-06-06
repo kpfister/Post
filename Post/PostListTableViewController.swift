@@ -11,9 +11,17 @@ import UIKit
 class PostListTableViewController: UITableViewController {
     override func viewDidLoad() {
         PostController.fetchPosts { (posts) in
-            
-            
         }
     }
+   
+    
+    var postController = PostController()
+    
+    
+    
+    
+    
+    
+    
     
 }
