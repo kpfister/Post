@@ -14,7 +14,7 @@ class PostController {
     static let endpoint = baseURL?.URLByAppendingPathExtension("json")
     
     
-    var posts: [Post] = [] // I think this will change
+    static var posts: [Post] = [] // I think this will change
     
     
     static func fetchPosts(completion: (posts: [Post]?) -> Void) {
@@ -23,11 +23,14 @@ class PostController {
         NetworkController.performRequestForURL(url, httpMethod: .Get) { (data, error) in
             guard let data = data,
                 postDictionary = (try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)) as? [String:[String: AnyObject]] else {
-                completion(posts: [])
-                return
+                    completion(posts: [])
+                    return
             }
             let post = postDictionary.flatMap({Post(dictionary: $0.1, identifier: $0.0)})
-            let sortedPosts = post.sort({$0.timesStamp > $1.timeStamp})
+            let sortedPosts = post.sort({$0.timeStamp > $1.timeStamp})
+            self.posts = sortedPosts
+            guard let completion = completion else {return}
+            completion(
         }
         
     }
