@@ -67,7 +67,7 @@ class PostController {
 }
 
 protocol PostControllerDelegate: class {
-    func postsUpdated()
+    func postsUpdated(posts: [Post])
     
     
 }
