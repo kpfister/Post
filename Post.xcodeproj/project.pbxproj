@@ -16,6 +16,7 @@
 		68D7B2B81CEA4AB500AC1655 /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2B71CEA4AB500AC1655 /* PostListTableViewController.swift */; };
 		68D7B2BA1CEA7CED00AC1655 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2B91CEA7CED00AC1655 /* Post.swift */; };
 		68D7B2BE1CEA7F9D00AC1655 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */; };
+		75FA733C1D08D0DA009F1219 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FA733B1D08D0DA009F1219 /* DateHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		68D7B2B71CEA4AB500AC1655 /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		68D7B2B91CEA7CED00AC1655 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		75FA733B1D08D0DA009F1219 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			children = (
 				68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */,
 				686132181CD92A5500A46449 /* NetworkController.swift */,
+				75FA733B1D08D0DA009F1219 /* DateHelper.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				68D7B2B81CEA4AB500AC1655 /* PostListTableViewController.swift in Sources */,
 				686131EB1CD92A0B00A46449 /* AppDelegate.swift in Sources */,
 				686132191CD92A5500A46449 /* NetworkController.swift in Sources */,
+				75FA733C1D08D0DA009F1219 /* DateHelper.swift in Sources */,
 				68D7B2BA1CEA7CED00AC1655 /* Post.swift in Sources */,
 				68D7B2BE1CEA7F9D00AC1655 /* PostController.swift in Sources */,
 			);

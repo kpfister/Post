@@ -19,6 +19,23 @@ class Post {
     let timeStamp: NSTimeInterval
     let identifier: NSUUID
     
+    //*************************//
+    //***POSTING / PUTTING****//
+    //***********************//
+
+    var jsonValue: [String:AnyObject] {
+        return [kText: text, kUsername:username, ktimestamp:timeStamp]
+    }
+    
+    var jsonData: NSData? {
+        return try? NSJSONSerialization.dataWithJSONObject(self.jsonValue, options: .PrettyPrinted)
+    }
+    
+    var endpoint: NSURL? {
+        
+        return PostController.baseURL?.URLByAppendingPathComponent(self.identifier.UUIDString).URLByAppendingPathExtension("json")
+    }
+        
     init(username: String, text: String, identifier: NSUUID = NSUUID(), timeStamp: NSTimeInterval = NSDate().timeIntervalSince1970) {
         
         self.username = username
@@ -41,8 +58,9 @@ class Post {
         self.timeStamp = NSTimeInterval(floatLiteral: timeStamp)
     }
         
-//    var queryTimestamp: Post {
-//        
-//    }
+    var queryTimestamp: NSTimeInterval {
+        
+        return timeStamp - 0.000001
+    }
     
 }

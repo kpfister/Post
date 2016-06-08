@@ -10,10 +10,7 @@ import Foundation
 
 class PostController {
     
-    
-    
-    
-    static let baseURL = NSURL(string: "https://devmtn-post.firebaseio.com/posts")
+    static let baseURL = NSURL(string: "https://devmtn-post.firebaseio.com/posts/")
     static let endpoint = baseURL?.URLByAppendingPathExtension("json")
     
     
@@ -28,24 +25,43 @@ class PostController {
     init() {
         fetchPosts()
     }
+    
     // Mark Create post
     func addPost(username: String, text: String) {
-        let post = Post.init(username: username, text: text)
-        guard let requestURL = PostController.endpoint else {
+        let post = Post(username: username, text: text)
+        guard let requestURL = post.endpoint else {
             fatalError("URL is nil")
             
         }
-        NetworkController.performRequestForURL(requestURL, httpMethod: .Put) { (data, error) in
+        
+        
+        
+        NetworkController.performRequestForURL(requestURL, httpMethod: .Put, body: post.jsonData ) { (data, error) in
+            if error != nil {
+                print("Error -> \(error!.localizedDescription)")
+            } else {
+                print("Its working!")
+            }
+            print("HEY DATA!!! \(data)")
             self.fetchPosts()
         }
     }
     
-    func fetchPosts(completion: ((posts: [Post]) -> Void)? = nil) {
+    func fetchPosts(reset reset:Bool = true, completion: ((posts: [Post]) -> Void)? = nil) {
         guard let url = PostController.endpoint else {
             fatalError("URL optional is nil in \(#file)")
         }
+        let queryEndInterval = reset ? NSDate().timeIntervalSince1970 : posts.last?.queryTimestamp ?? NSDate().timeIntervalSince1970
         
-        NetworkController.performRequestForURL(url, httpMethod: .Get) { (data, error) in
+        //TODO update to query timestamp
+        
+        let urlParameters = [
+            "orderBy": "\"timestamp\"",
+            "endAt": "\(queryEndInterval)",
+            "limitToLast": "15",
+            ]
+        NetworkController.performRequestForURL(url, httpMethod: .Get, urlParameters: urlParameters, body: nil) { (data, error) in
+       
             guard let data = data,
                 postDictionary = (try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)) as? [String:[String: AnyObject]] else {
                     if let completion = completion {
@@ -56,11 +72,18 @@ class PostController {
             let post = postDictionary.flatMap({Post(dictionary: $0.1, identifier: $0.0)})
             let sortedPosts = post.sort({$0.timeStamp > $1.timeStamp})
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.posts = sortedPosts
+                if reset {
+                    self.posts = sortedPosts
+                    } else {
+                    
+                        self.posts.appendContentsOf(sortedPosts)
+                    }
+                
                 if let completion = completion {
                     completion(posts: sortedPosts)
-                    print(sortedPosts)
+                    
                 }
+                return
             })
         }
     }

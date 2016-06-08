@@ -21,6 +21,10 @@ class PostListTableViewController: UITableViewController, PostControllerDelegate
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
+    @IBAction func addNewPost(sender: UIBarButtonItem) {
+        presentNewPostAlert()
+        
+    }
     
     @IBAction func refreshControlPull(sender: UIRefreshControl) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
@@ -32,9 +36,58 @@ class PostListTableViewController: UITableViewController, PostControllerDelegate
         }
     }
     
+    func presentNewPostAlert() {
+        var userNameTextField: UITextField?
+        var messageTextField: UITextField?
+        
+        let alertController = UIAlertController(title:"Add new post", message: "Whats on your mind?", preferredStyle: .Alert)
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "Display Name"
+            userNameTextField = textField
+        }
+        alertController.addTextFieldWithConfigurationHandler{ (messageField) in
+            messageField.placeholder = "Post Body..."
+            messageTextField = messageField
+        }
+        
+        let createAction = UIAlertAction(title: "Add", style: .Default) { (action) in
+            guard let username = userNameTextField?.text where !username.isEmpty, let text = messageTextField?.text where !text.isEmpty else {
+                self.presentErrorAlert()
+                return
+            }
+            self.postController.addPost(username, text: text)
+        }
+        alertController.addAction(createAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func presentErrorAlert() {
+        
+        let alertController = UIAlertController(title: "Uh oh!", message: "You may be missing information or have network connectivity issues. Please try again.", preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     
     func postsUpdated(posts: [Post]) {
         tableView.reloadData()
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row + 1 == postController.posts.count {
+            postController.fetchPosts(reset: false, completion: { (posts) in
+                if !posts .isEmpty {
+                    tableView.reloadData()
+                }
+            })
+        }
     }
     
     
@@ -51,8 +104,10 @@ class PostListTableViewController: UITableViewController, PostControllerDelegate
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath)
         let post = postController.posts[indexPath.row]
+        let date = NSDate(timeIntervalSince1970: post.timeStamp)
         cell.textLabel?.text = post.text
-        cell.detailTextLabel?.text = "\(post.username) \(post.timeStamp)\(indexPath.row)"
+        cell.detailTextLabel?.text = "\(post.username) \(date.dateString())\(indexPath.row)"
+        
         
         
         return cell
