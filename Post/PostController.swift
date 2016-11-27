@@ -75,7 +75,7 @@ class PostController {
                 if reset {
                     self.posts = sortedPosts
                     } else {
-                    
+                
                         self.posts.appendContentsOf(sortedPosts)
                     }
                 
